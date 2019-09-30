@@ -1,11 +1,17 @@
 import React, { Fragment } from 'react';
-import { Widget } from 'react-chat-widget';
+import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 
 const ChatWidget = () => {
+  const componentDidMount = () => {
+    addResponseMessage("Welcome to this awesome chatbot!");
+  }
+
   const handleNewUserMessage = newMessage => {
     alert(`New message incoming: ${newMessage}`);
     // TODO: Send the message to the backend API
+    componentDidMount();
+    // Response message from backend API
   };
 
   return (

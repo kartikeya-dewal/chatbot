@@ -1,0 +1,61 @@
+[
+  {
+    "messages_list": {
+      "id_230987410258": {
+        "name": "Mr.Jone Doe",
+        "messages": {
+          "in_msg_2107413251": {
+            "message": "Hi, how are u",
+            "created_at": "2019-09-30T06:39:49.643503Z"
+          },
+          "in_msg_0185089603": {
+            "message": "My visa condition is weird",
+            "created_at": "2019-09-31T06:39:49.643503Z"
+          }
+        }
+      },
+      "id_23098741298570187": {
+        "name": "Miss Mary Jane",
+        "messages": {
+          "in_msg_2107413251": {
+            "message": "I'm here to request a resume consultation",
+            "created_at": "2019-09-30T06:39:49.643503Z"
+          },
+          "in_msg_0185089603": {
+            "message": "I'm from Auckland",
+            "created_at": "2019-10-11T06:39:49.643503Z"
+          }
+        }
+      }
+    }
+  },
+  {
+    "resume_storage": {
+      "resume_id_13847102478": {
+        "register_id": "id_230987410258",
+        "register name": "Jone Doe",
+        "uploaded resume": false,
+        "overall_match_rate": "85",
+        "education_level": {
+          "master_degree": "Master of Science",
+          "bachelor_degree": "Bachelor of philosophy",
+          "secondary_highschool_degree": "culinary"
+        },
+        "skill_set": {
+          "HTML5": 1,
+          "PHP7": 5,
+          "Javascript ES6": 5,
+          "R": 3,
+          "Python": 4,
+          "data analyst": 5
+        },
+        "personality": [
+          "outgoing",
+          "people-friendly",
+          "aggressive",
+          "proactive"
+        ]
+      }
+    }
+  }
+]
