@@ -14,6 +14,16 @@ Within the `ai-hackathon` directory, there are 3 modules:<br/>
 
 Python 3.7.x, Node.js 10.16.x, npm 6.9.x
 
+Install pipenv before creating a virtual environment for development. Execute the command below on teminal.
+
+```bash
+pip install pipenv
+
+or
+
+pip3 install pipenv
+```
+
 ## Running the app
 
 Clone the repository and switch to `develop` branch. From project root directory, execute following commands from the terminal:
