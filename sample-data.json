@@ -32,28 +32,10 @@
       "resume_id_13847102478": {
         "register_id": "id_230987410258",
         "register name": "Jone Doe",
-        "uploaded resume": false,
         "overall_match_rate": "85",
-        "works_experience": {
-          "work_1890174": {
-            "work_title": "Janitor",
-            "experience_level": "junior/graduate",
-            "experience_years": "2",
-            "working_year_start": "09-10-2010",
-            "working_year_end": "18-12-2012"
-          },
-          "work_890523": {
-            "work_title": "credit auditor",
-            "experince_level": "intermediate",
-            "experience_years": "3",
-            "working_year_start": "28-01-2013",
-            "working_year_end": "14-09-2016"
-          }
-        },
         "education_level": {
-          "master_degree": "Master of Science",
-          "bachelor_degree": "Bachelor of engineering",
-          "secondary_highschool_degree": "mechanic"
+          "current_edu_level": 4,
+          "threshold_level": 3
         },
         "skill_set": {
           "HTML5": 1,
@@ -63,39 +45,27 @@
           "Python": 4,
           "data analyst": 5
         },
-        "personality": [
-          "outgoing",
-          "people-friendly",
-          "aggressive",
-          "proactive"
-        ],
-        "sentimental_level": 9
+        "research_value": 0.8,
+        "sentimental_level": {
+          "1": "0.1",
+          "2": "0.2",
+          "3": "0.1",
+          "4": "0.2",
+          "5": "0.1",
+          "6": "0.2",
+          "7": "0.1",
+          "8": "0.2",
+          "9": "0.1",
+          "10": "0.2"
+        }
       },
       "resume_id_134636317245": {
         "register_id": "id_23098741298570187",
         "register name": "Jone Doe",
-        "uploaded resume": false,
         "overall_match_rate": "85",
-        "works_experience": {
-          "work_1890174": {
-            "work_title": "kitchen hand",
-            "experience_level": "junior/graduate",
-            "experience_years": "2",
-            "working_year_start": "09-10-2010",
-            "working_year_end": "18-12-2012"
-          },
-          "work_890523": {
-            "work_title": "marketing manager",
-            "experince_level": "Senior",
-            "experience_years": "4",
-            "working_year_start": "28-01-2013",
-            "working_year_end": "14-09-2017"
-          }
-        },
         "education_level": {
-          "master_degree": "Master of Business",
-          "bachelor_degree": "Bachelor of philosophy",
-          "secondary_highschool_degree": "culinary"
+          "current_edu_level": 4,
+          "threshold_level": 3
         },
         "skill_set": {
           "HTML5": 2,
@@ -105,40 +75,21 @@
           "Python": null,
           "data analyst": 2
         },
-        "personality": [
-          "people person",
-          "cross-cultural leadership",
-          "detail oriented",
-          "group orgainizer"
-        ],
-        "sentimental_level": 7
-      }
-    }
-  },
-  { "recruiter_list": {
-      "recruiter_id_1708957320": {
-        "recruiter_name": "Hell and Fire ltd.",
-        "requirements": {
-          "work-title": "Gelato Business Analyst",
-          "working_experience": "junior/graduate",
-          "education_level": {
-            "minimum_working_year": 3,
-            "edu_base_level": "master_degree",
-            "edu_relevant_list": [
-              "master of life",
-              "master of chaos",
-              "master of GOT",
-              "master of migration"
-            ]
-          },
-          "skill_set": [
-            "html5",
-            "python",
-            "data analyst",
-            "business analyst"
-          ]
+        "research_value": 0.8,
+        "sentimental_level": {
+          "1": "0.1",
+          "2": "0.2",
+          "3": "0.1",
+          "4": "0.2",
+          "5": "0.1",
+          "6": "0.2",
+          "7": "0.1",
+          "8": "0.2",
+          "9": "0.1",
+          "10": "0.2"
         }
       }
     }
   }
+  
 ]
