@@ -1,5 +1,8 @@
 node_modules
 
+# VS Code
+.vscode
+
 ### Django ###
 *.log
 *.pot
@@ -124,4 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
