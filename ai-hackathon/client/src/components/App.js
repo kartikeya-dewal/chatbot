@@ -7,9 +7,15 @@ const App = () => {
   return (
     <Fragment>
       <Header />
-      <div className='container chat-widget'>
-        <EduChart />
-        <ChatWidget />
+      <div className='container'>
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <EduChart />
+          </div>
+        </div>
+        <div className='chat-widget'>
+          <ChatWidget />
+        </div>
       </div>
     </Fragment>
   );
