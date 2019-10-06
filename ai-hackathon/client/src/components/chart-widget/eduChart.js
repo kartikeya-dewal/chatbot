@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import { BarChart, CartesianGrid, XAxis, YAxis, Label, LabelList, Bar, ReferenceLine, ResponsiveContainer } from 'recharts'
 const Chart = () => {
-  const [width, setWidth] = useState(400)
   const [height, setHeight] = useState(400)
+  const [width, setWidth] = useState(400)
   const data = [
     {
       "type": "Education",
@@ -11,7 +11,7 @@ const Chart = () => {
       "reqLevel": 3
     }
   ];
-  
+
   // Array of Education level description
   const eduData = [
     'no primary',
@@ -40,7 +40,7 @@ const Chart = () => {
       return 'missing education data';
     }
   }
-  
+
   return (
     <Fragment>
       <h2 className='text-center'>Education Level</h2>
