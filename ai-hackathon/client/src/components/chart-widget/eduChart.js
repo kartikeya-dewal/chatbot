@@ -7,15 +7,14 @@ const Chart = () => {
     {
       "type": "Education",
       "name": "Bachelor of Life Science",
-      "eduLevel": 3,
+      "eduLevel": 1,
       "reqLevel": 3
     }
   ];
 
   // Array of Education level description
   const eduData = [
-    'no primary',
-    'secondary',
+    'no beginner',
     'graduate',
     'post graduate',
     'doctorate'
