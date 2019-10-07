@@ -21,8 +21,10 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "react": "^16.9.0",
     "react-chat-widget": "^2.1.5",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "recharts": "^1.7.1"
   }
 }

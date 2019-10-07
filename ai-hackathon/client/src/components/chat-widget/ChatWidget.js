@@ -1,17 +1,27 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
+import axios from 'axios';
 
 const ChatWidget = () => {
-  const componentDidMount = () => {
-    addResponseMessage("Welcome to this awesome chatbot!");
-  }
+  useEffect(() => {
+    addResponseMessage('Hi! How are you?');
+  }, []);
 
   const handleNewUserMessage = newMessage => {
-    alert(`New message incoming: ${newMessage}`);
-    // TODO: Send the message to the backend API
-    componentDidMount();
-    // Response message from backend API
+    // Fetch response from backend
+    axios
+      .put(
+        '/api/user/1/',
+        { userText: newMessage },
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        addResponseMessage(response.data.message.toString());
+      });
   };
 
   return (
