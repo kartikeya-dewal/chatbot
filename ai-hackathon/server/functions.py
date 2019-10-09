@@ -3,11 +3,24 @@ import pandas as pd
 
 ### Chat variables ###
 
+JDs = pd.read_csv("./server/src/indeed 1-500 data scientist JD.csv")
+
+resumes = pd.read_csv("./server/src/indeed 1-800 data scientist resume.csv")
+
+resume = resumes.resume_text[6]
+
+JD = JDs.JobDescription[6]
+
+company_name = JDs.Company[6]
+
+tool_list = responder.tool_match_list(JD,resume)
 
 chat_corpus = {
-    "greeting" : "Could you please tell me about your educational background?",
-    "education" : "hey",
-    "reason" : "yo"
+    0 : "Could you please tell me about your educational background?",
+    1 : "Why did you leave your previous job?",
+    2 : str("What attracts you about this role and " + company_name + "?"),
+    3 : str("Kindly rate your proficiency in" + tool_list + "as begginer,intermediate or advanced sepated by ','."),
+    4 : "Thank you, you may close the chat now"
 }
 
 index = 0
@@ -16,24 +29,48 @@ chat_log = pd.DataFrame()
 
 greeting_responses = ["HI", "HEY", "HELLO", "GREETINGS", "GREETING", "SUP", "WHATS UP","HOWDY","YO"]
 
+degree, university = responder.get_resume_education(resume)
 
 ### Chatbot response ###
 
 def botResponse(text):
     global index
-    chat_index = list(chat_corpus.keys())[index]
+    global chat_log
     # Response to greeting message
-    if chat_index == "greeting":
+    if index == 0:
         text_grams = responder.word_grams(text)
         for gram_index in range(0,len(text_grams)):
             if text_grams[gram_index] in greeting_responses:
-                reply = chat_corpus.get(chat_index)
+                reply = chat_corpus.get(index)
                 index = index + 1
                 chat_log.loc[index,"index"] = index
                 chat_log.loc[index,"response"] = text
+                break
             else:
-                reply = "Sorry, please reply with a proper greeting response"
-    else:
-        reply = chat_corpus.get(chat_index)
+                reply = "Sorry, please reply with a proper greeting response."
+    # Response to education message
+    elif index == 1:
+        text_grams = responder.word_grams(text,2,2)
+        for gram_index in range(0,len(text_grams)):
+            if text_grams[gram_index] in responder.word_grams(university,2,2):
+                reply = chat_corpus.get(index)
+                index = index + 1
+                chat_log.loc[index,"index"] = index
+                chat_log.loc[index,"response"] = text
+                break
+            else:
+                reply = "Sorry, please enter your degree and university name properly."
+    elif index in [2,3]:
+        text_grams = responder.word_grams(text)
+        if len(text_grams) < 10:
+            reply = "Sorry, please give a more descriptive answer."
+        else:
+            reply = chat_corpus.get(index)
+            index = index + 1
+            chat_log.loc[index,"index"] = index
+            chat_log.loc[index,"response"] = text
+    elif index == 4:
+        text_grams = responder.word_grams(text)
+        reply = "hey"
     return reply
 

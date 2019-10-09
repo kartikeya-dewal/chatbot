@@ -166,5 +166,11 @@ def tool_score(JD,resume):
             tool_match.loc[index,"tool"] = tool
             tool_match.loc[index,"type"] = tool_type
             tool_match.loc[index,"match"] = 0
-    return tool_match    
+    return tool_match
+
+def tool_match_list(JD,resume):
+    tool_df = tool_score(JD,resume)
+    tool_df_subset = tool_df.query('match == 1')
+    tool_list = list(tool_df_subset.tool)
+    return(tool_list)
 
