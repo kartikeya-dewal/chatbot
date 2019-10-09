@@ -18,71 +18,6 @@ company_name = JDs.Company[7]
 
 question_tools, tool_num = responder.tool_match_list(JD,resume)
 
-dict_object = {
-    "id": 1,
-    "name": "Simarpreet Luthra",
-    "overall_score": "85",
-    "education_level": [
-        {
-        "type": "Education",
-        "name": "Bachelor of Life Science",
-        "eduLevel": 1,
-        "reqLevel": 3
-        }
-    ],
-    "skill_set": [
-        {
-        "name": "Python",
-        "level": 0.25
-        },
-        {
-        "name": "HTML5",
-        "level": 0.5
-        },
-        {
-        "name": "R",
-        "level": 0.75
-        },
-        {
-        "name": "Java",
-        "level": 0.25
-        },
-        {
-        "name": "PHP7",
-        "level": 0.5
-        }
-    ],
-    "research_value": [
-        {
-            "name": 'actual',
-            "value": 0.8
-        },
-        {
-            "name": 'remain',
-            "value": 0.2
-        }
-    ],
-    "sentimental_level": [
-        {
-        "sentiValue": 0.87
-        },
-        {
-        "sentiValue": 0.8
-        },
-        {
-        "sentiValue": -0.2
-        },
-        {
-        "sentiValue": 0.38
-        },
-        {
-        "sentiValue": 0.45
-        }
-    ]
-}
-
-json_object = json.dumps(dict_object)
-
 chat_corpus = {
     0 : "Could you please tell me about your educational background?",
     1 : "Great, why did you leave your previous job?",
@@ -147,10 +82,77 @@ def botResponse(text):
             reply = str("Sorry, please rate your proficiency in" + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
         else:
             reply = chat_corpus.get(index)
+            chat_log.loc[index + 1,"index"] = index + 1
+            chat_log.loc[index + 1,"response"] = text
             index = index + 1
-            chat_log.loc[index,"index"] = index
-            chat_log.loc[index,"response"] = text
     # Response to close the chat
     elif index == 5:
         reply = chat_corpus.get(index)
     return reply
+
+def scoring_metric:
+    if index == 5:
+        dict_object = {
+            "id": 1,
+            "name": "Simarpreet Luthra",
+            "overall_score": "85",
+            "education_level": [
+                {
+                "type": "Education",
+                "name": "Bachelor of Life Science",
+                "eduLevel": 1,
+                "reqLevel": 3
+                }
+            ],
+            "skill_set": [
+                {
+                "name": "Python",
+                "level": 0.25
+                },
+                {
+                "name": "HTML5",
+                "level": 0.5
+                },
+                {
+                "name": "R",
+                "level": 0.75
+                },
+                {
+                "name": "Java",
+                "level": 0.25
+                },
+                {
+                "name": "PHP7",
+                "level": 0.5
+                }
+            ],
+            "research_value": [
+                {
+                    "name": 'actual',
+                    "value": 0.8
+                },
+                {
+                    "name": 'remain',
+                    "value": 0.2
+                }
+            ],
+            "sentimental_level": [
+                {
+                "sentiValue": 0.87
+                },
+                {
+                "sentiValue": 0.8
+                },
+                {
+                "sentiValue": -0.2
+                },
+                {
+                "sentiValue": 0.38
+                },
+                {
+                "sentiValue": 0.45
+                }
+            ]
+        }
+        json_object = json.dumps(dict_object)
+        return json_object
