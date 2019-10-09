@@ -172,7 +172,8 @@ def tool_match_list(JD,resume):
     tool_df = tool_score(JD,resume)
     tool_df_subset = tool_df.query('match == 1')
     tool_list = list(tool_df_subset.tool)
+    num = len(tool_list)
     sep = ", "
     tools = sep.join(tool_list)
-    return(tools)
+    return tools, num
 
