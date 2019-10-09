@@ -71,10 +71,10 @@ def company_research_score(response,JD):
     residual = text - stopwords
     intersection = set(word_grams(JD)).intersection(res)
     similarity = len(intersection)
-    if similarity <= 8:
-        research = 0.05 * similarity
-    elif similarity > 8 and similarity <= 14:
-        research = 0.1 * (similarity - 4)
+    if similarity <= 5:
+        research = 0.1 * similarity
+    elif similarity > 5 and similarity <= 10:
+        research = 0.5 + 0.1 * (similarity - 5)
     else:
         research = 1
     return round(research,2)
@@ -115,7 +115,11 @@ def get_experience(resume):
             company = lines[line_num+2]
             timeline = lines[line_num+3]
             break
-    return position,company,timeline
+    if "PRESENT" in timeline.upper():
+        question = str("Great, why do you want to leave your current job as " + position + " at " + company + "?")
+    else:
+        question = str("Great, why did you leave your previous job as " + position + " at " + company + "?")
+    return question
 
 def education_rank(JD,resume):
     current_level = 'UNDERGRADUATE'
