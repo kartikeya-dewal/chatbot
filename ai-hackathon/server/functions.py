@@ -91,8 +91,8 @@ def botResponse(text):
         reply = chat_corpus.get(index)
     return reply
 
-def scoring_metric():
-    if index == 5:
+def scoring_metric(user):
+    if index == 0:
         dict_object = {
             "id": "1",
             "name": "Simarpreet Luthra",
