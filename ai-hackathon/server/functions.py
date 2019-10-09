@@ -2,6 +2,7 @@ from .src import responder
 import pandas as pd
 import json
 
+
 ### Chat variables ###
 
 education_keyword_list = ["UNDERGRADUATE","BACHELORS","BSC","BACHELOR","TERTIARY","POSTGRADUATE","MASTERS","MASTER","MSC","DIPLOMA","PHD","DOCTORATE"]
@@ -90,10 +91,10 @@ def botResponse(text):
         reply = chat_corpus.get(index)
     return reply
 
-def scoring_metric:
+def scoring_metric():
     if index == 5:
         dict_object = {
-            "id": 1,
+            "id": "1",
             "name": "Simarpreet Luthra",
             "overall_score": "85",
             "education_level": [
