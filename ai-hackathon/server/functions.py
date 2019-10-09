@@ -19,9 +19,9 @@ company_name = JDs.Company[7]
 question_tools, tool_num = responder.tool_match_list(JD,resume)
 
 dict_object = {
-    "register_id": 1,
-    "register name": "Simarpreet Luthra",
-    "overall_match_rate": "85",
+    "id": 1,
+    "name": "Simarpreet Luthra",
+    "overall_score": "85",
     "education_level": [
         {
         "type": "Education",
