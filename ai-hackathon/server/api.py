@@ -16,15 +16,17 @@ class UserViewSet(viewsets.ModelViewSet):
         userObject = self.get_object()
         serializer = self.get_serializer(userObject)
         userId = serializer.data["id"]
-        data = scoring_metric(userObject)
-        print(data)
-        return Response({"userId": userId, "data": data})
+        return Response({"userId": userId})
 
     def update(self, request, *args, **kwargs):
         print(request.data)
         res = botResponse(request.data["userText"])
         return Response({"message": res})
 
+    def update_user_score(self, request, *args, **kwargs):
+        data = scoring_metric(userObject)
+        print(data)
+        return Response({"data": data})
 
 # Chart Data
 class ChartsView(APIView):

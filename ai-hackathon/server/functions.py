@@ -15,6 +15,8 @@ resume = resumes.resume_text[6]
 
 JD = JDs.JobDescription[7]
 
+position_name = JDs.JobTitle[7]
+
 company_name = JDs.Company[7]
 
 question_tools, tool_num = responder.tool_match_list(JD,resume)
@@ -25,12 +27,14 @@ current_edu,current_level_rank,threshold_level_rank = responder.education_rank(J
 
 tool_df = responder.tool_score(JD,resume)
 
+proficiency = []
+
 chat_corpus = {
     0 : "Could you please tell me about your educational background?",
     1 : previous_experience_question,
-    2 : str("Alright, could you tell  me mhat attracts you about this role and " + company_name + "?"),
+    2 : str("Alright, could you tell  me why do want to join " + company_name + "?"),
     3 : str("Kindly rate your proficiency in " + question_tools + " as beginner, intermediate or advanced sepated by ','"),
-    4 : "Thank you, you may close the chat now\nOur recruiter will get in touch with you shortly.",
+    4 : "Thank you, Our recruiter will get in touch with you shortly.",
     5 : "You may close the chat now!!!"
 }
 
@@ -71,7 +75,7 @@ def botResponse(text):
     # Response to descriptive questions
     elif index in [2,3]:
         text_grams = responder.word_grams(text)
-        if len(text_grams) < 10 or responder.sentiment_score(text) == 0:
+        if len(text_grams) < 5 or responder.sentiment_score(text) == 0:
             reply = "Sorry, please give a more descriptive answer."
         else:
             reply = chat_corpus.get(index)
@@ -85,7 +89,7 @@ def botResponse(text):
             reply = str("Sorry, please rate your proficiency in" + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
         else:
             reply = chat_corpus.get(index)
-            chat_log.loc[index + 1,"response"] = text
+            chat_log.loc[index,"response"] = text
             index = index + 1
     # Response to close the chat
     elif index == 5:
@@ -93,17 +97,18 @@ def botResponse(text):
     return reply
 
 def scoring_metric(user):
-    if index == 0:
+    if index == 5:
         tool_match_index = list(tool_df.query('match==1').index)
         proficiency_index = 0
         for tool_df_index in tool_match_index:
-            if proficiency[c] == "BEGINNER":
+            if proficiency[proficiency_index] == "BEGINNER":
                 tool_df.loc[tool_match_index,"match"] = 0.65
-            elif proficiency[c] == "INTERMEDIATE":
+            elif proficiency[proficiency_index] == "INTERMEDIATE":
                 tool_df.loc[tool_match_index,"match"] = 0.8
+            proficiency_index = proficiency_index + 1       
         skill_list = []
-        for index in range(0,len(tool_df)):
-            tool_list.append({"name": tool_df.loc[index,"tool"], "level": tool_df.loc[index,"match"]})
+        for skill_index in range(0,len(tool_df)):
+            skill_list.append({"name": tool_df.loc[skill_index,"tool"], "level": tool_df.loc[skill_index,"match"]})
         dict_object = {
             "id": "1",
             "name": "Simarpreet Luthra",

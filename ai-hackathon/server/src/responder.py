@@ -69,12 +69,12 @@ def company_research_score(response,JD):
     text = set(word_grams(response))
     stopwords = set([stopword.upper() for stopword in nltk.corpus.stopwords.words('english')])
     residual = text - stopwords
-    intersection = set(word_grams(JD)).intersection(res)
+    intersection = set(word_grams(JD)).intersection(residual)
     similarity = len(intersection)
-    if similarity <= 5:
-        research = 0.1 * similarity
-    elif similarity > 5 and similarity <= 10:
-        research = 0.5 + 0.1 * (similarity - 5)
+    if similarity <= 3:
+        research = 0.2 * similarity
+    elif similarity > 3 and similarity <= 9:
+        research = 0.7 + 0.1 * (similarity - 4)
     else:
         research = 1
     return round(research,2)

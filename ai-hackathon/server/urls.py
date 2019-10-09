@@ -4,11 +4,7 @@ from .api import UserViewSet, ChartsView
 
 router = routers.DefaultRouter()
 router.register("api/user", UserViewSet, "user")
-# router.register("api/charts/<int:pk>", ChartsView.as_view(), "charts")
+#router.register("api/charts/user", ChartsView.as_view(), "charts")
 
-# urlpatterns = router.urls
 
-urlpatterns = [
-    path("api/charts/<int:pk>", ChartsView.as_view(), "charts"),
-    path("", include(router.urls))
-]
+urlpatterns = router.urls
