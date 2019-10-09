@@ -13,14 +13,14 @@ JD = JDs.JobDescription[6]
 
 company_name = JDs.Company[6]
 
-tool_list = responder.tool_match_list(JD,resume)
+question_tools = responder.tool_match_list(JD,resume)
 
 chat_corpus = {
     0 : "Could you please tell me about your educational background?",
     1 : "Why did you leave your previous job?",
     2 : str("What attracts you about this role and " + company_name + "?"),
-    3 : str("Kindly rate your proficiency in" + tool_list + "as begginer,intermediate or advanced sepated by ','."),
-    4 : "Thank you, you may close the chat now"
+    3 : str("Kindly rate your proficiency in " + question_tools + " as beginner, intermediate or advanced sepated by ','"),
+    4 : "Thank you, you may close the chat now\nOur recruiter will get in touch with you shortly."
 }
 
 index = 0
