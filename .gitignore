@@ -126,3 +126,5 @@ dmypy.json
 .pyre/
 
 .vscode/settings.json
+# static js
+ai-hackathon/client/static/js/
