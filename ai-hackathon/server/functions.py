@@ -19,32 +19,66 @@ company_name = JDs.Company[7]
 question_tools, tool_num = responder.tool_match_list(JD,resume)
 
 dict_object = {
-    "register_id": "id_230987410258",
-    "register name": "Jone Doe",
+    "register_id": 1,
+    "register name": "Simarpreet Luthra",
     "overall_match_rate": "85",
-    "education_level": {
-        "name": "PHD in Computer Science",
-        "current_edu_level": 4,
-        "threshold_level": 3
-    },
-    "skill_set": {
-        "HTML": 1,
-        "PHP": 0.5,
-        "Javascript": 0.8,
-        "R": 0.3,
-        "Python": 0.1,
+    "education_level": [
+        {
+        "type": "Education",
+        "name": "Bachelor of Life Science",
+        "eduLevel": 1,
+        "reqLevel": 3
+        }
+    ],
+    "skill_set": [
+        {
+        "name": "Python",
+        "level": 0.25
         },
-    "research_value": {
-        "actual" : 0.8,
-        "remaining" : 0.2
-    },
-    "sentimental_level": {
-        "1": "0.1",
-        "2": "0.2",
-        "3": "0.1",
-        "4": "0.2",
-        "5": "0.1"
-    }
+        {
+        "name": "HTML5",
+        "level": 0.5
+        },
+        {
+        "name": "R",
+        "level": 0.75
+        },
+        {
+        "name": "Java",
+        "level": 0.25
+        },
+        {
+        "name": "PHP7",
+        "level": 0.5
+        }
+    ],
+    "research_value": [
+        {
+            "name": 'actual',
+            "value": 0.8
+        },
+        {
+            "name": 'remain',
+            "value": 0.2
+        }
+    ],
+    "sentimental_level": [
+        {
+        "sentiValue": 0.87
+        },
+        {
+        "sentiValue": 0.8
+        },
+        {
+        "sentiValue": -0.2
+        },
+        {
+        "sentiValue": 0.38
+        },
+        {
+        "sentiValue": 0.45
+        }
+    ]
 }
 
 json_object = json.dumps(dict_object)
