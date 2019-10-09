@@ -86,7 +86,7 @@ def botResponse(text):
         text_grams = responder.word_grams(text)
         proficiency = [gram for gram in text_grams if gram in ['BEGINNER','INTERMEDIATE','ADVANCED']]
         if len(proficiency) != tool_num:
-            reply = str("Sorry, please rate your proficiency in" + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
+            reply = str("Sorry, please rate your proficiency in " + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
         else:
             reply = chat_corpus.get(index)
             chat_log.loc[index,"response"] = text
@@ -102,13 +102,14 @@ def scoring_metric(user):
         proficiency_index = 0
         for tool_df_index in tool_match_index:
             if proficiency[proficiency_index] == "BEGINNER":
-                tool_df.loc[tool_match_index,"match"] = 0.65
+                tool_df.loc[tool_df_index,"match"] = 0.65
             elif proficiency[proficiency_index] == "INTERMEDIATE":
-                tool_df.loc[tool_match_index,"match"] = 0.8
-            proficiency_index = proficiency_index + 1       
+                tool_df.loc[tool_df_index,"match"] = 0.8
+            proficiency_index = proficiency_index + 1
         skill_list = []
         for skill_index in range(0,len(tool_df)):
             skill_list.append({"name": tool_df.loc[skill_index,"tool"], "level": tool_df.loc[skill_index,"match"]})
+        research = round(0.5 * responder.company_research_score(chat_log.response[3],JD) +  0.5 * responder.company_research_score(resume,JD),2)
         dict_object = {
             "id": "1",
             "name": "Simarpreet Luthra",
@@ -125,11 +126,11 @@ def scoring_metric(user):
             "research_value": [
                 {
                     "name": 'actual',
-                    "value": responder.company_research_score(chat_log.response[3],JD)
+                    "value": research
                 },
                 {
                     "name": 'remain',
-                    "value": 1 - responder.company_research_score(chat_log.response[3],JD)
+                    "value": 1 - research
                 }
             ],
             "sentimental_level": [
