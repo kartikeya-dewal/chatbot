@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const ChatWidget = () => {
   useEffect(() => {
-    addResponseMessage('Hi! How are you?');
+    addResponseMessage('Hi! I am the interview chatbot Hirend');
   }, []);
 
   const handleNewUserMessage = newMessage => {
@@ -28,7 +28,7 @@ const ChatWidget = () => {
     <Fragment>
       <Widget
         handleNewUserMessage={message => handleNewUserMessage(message)}
-        title='Chatbot'
+        title='Hirend'
         subtitle={`G'day`}
       />
     </Fragment>
