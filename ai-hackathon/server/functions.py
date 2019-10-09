@@ -92,8 +92,8 @@ def botResponse(text):
         reply = chat_corpus.get(index)
     return reply
 
-def scoring_metric():
-    if index == 5:
+def scoring_metric(user):
+    if index == 0:
         tool_match_index = list(tool_df.query('match==1').index)
         proficiency_index = 0
         for tool_df_index in tool_match_index:
