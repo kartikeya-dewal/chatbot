@@ -15,16 +15,26 @@ resume = resumes.resume_text[6]
 
 JD = JDs.JobDescription[7]
 
+position_name = JDs.JobTitle[7]
+
 company_name = JDs.Company[7]
 
 question_tools, tool_num = responder.tool_match_list(JD,resume)
 
+previous_experience_question = responder.get_experience(resume)
+
+current_edu,current_level_rank,threshold_level_rank = responder.education_rank(JD,resume)
+
+tool_df = responder.tool_score(JD,resume)
+
+proficiency = []
+
 chat_corpus = {
     0 : "Could you please tell me about your educational background?",
-    1 : "Great, why did you leave your previous job?",
-    2 : str("Alright, could you tell  me mhat attracts you about this role and " + company_name + "?"),
+    1 : previous_experience_question,
+    2 : str("Alright, could you tell  me why do want to join " + company_name + "?"),
     3 : str("Kindly rate your proficiency in " + question_tools + " as beginner, intermediate or advanced sepated by ','"),
-    4 : "Thank you, you may close the chat now\nOur recruiter will get in touch with you shortly.",
+    4 : "Thank you, Our recruiter will get in touch with you shortly.",
     5 : "You may close the chat now!!!"
 }
 
@@ -34,22 +44,20 @@ chat_log = pd.DataFrame()
 
 greeting_responses = ["HI", "HEY", "HELLO", "GREETINGS", "GREETING", "SUP", "WHATS UP","HOWDY","YO"]
 
-degree, university = responder.get_resume_education(resume)
-
 ### Chatbot response ###
 
 def botResponse(text):
     global index
     global chat_log
+    global proficiency
     # Response to greeting message
     if index == 0:
         text_grams = responder.word_grams(text)
         for gram_index in range(0,len(text_grams)):
             if text_grams[gram_index] in greeting_responses:
                 reply = chat_corpus.get(index)
-                index = index + 1
-                chat_log.loc[index,"index"] = index
                 chat_log.loc[index,"response"] = text
+                index = index + 1
                 break
             else:
                 reply = "Sorry, please reply with a proper greeting response."
@@ -59,32 +67,29 @@ def botResponse(text):
         for gram_index in range(0,len(text_grams)):
             if text_grams[gram_index] in education_keyword_list:
                 reply = chat_corpus.get(index)
-                index = index + 1
-                chat_log.loc[index,"index"] = index
                 chat_log.loc[index,"response"] = text
+                index = index + 1
                 break
             else:
                 reply = "Sorry, please enter your degree and university name properly."
     # Response to descriptive questions
     elif index in [2,3]:
         text_grams = responder.word_grams(text)
-        if len(text_grams) < 10 or responder.sentiment_score(text) == 0:
+        if len(text_grams) < 5 or responder.sentiment_score(text) == 0:
             reply = "Sorry, please give a more descriptive answer."
         else:
             reply = chat_corpus.get(index)
-            index = index + 1
-            chat_log.loc[index,"index"] = index
             chat_log.loc[index,"response"] = text
+            index = index + 1
     # Response to toolset question
     elif index == 4:
         text_grams = responder.word_grams(text)
-        text_grams = [gram for gram in text_grams if gram in ['BEGINNER','INTERMEDIATE','ADVANCED']]
-        if len(text_grams) != tool_num:
-            reply = str("Sorry, please rate your proficiency in" + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
+        proficiency = [gram for gram in text_grams if gram in ['BEGINNER','INTERMEDIATE','ADVANCED']]
+        if len(proficiency) != tool_num:
+            reply = str("Sorry, please rate your proficiency in " + question_tools + " as 'beginner', 'intermediate' or 'advanced' sepated by ','")
         else:
             reply = chat_corpus.get(index)
-            chat_log.loc[index + 1,"index"] = index + 1
-            chat_log.loc[index + 1,"response"] = text
+            chat_log.loc[index,"response"] = text
             index = index + 1
     # Response to close the chat
     elif index == 5:
@@ -92,7 +97,19 @@ def botResponse(text):
     return reply
 
 def scoring_metric(user):
-    if index == 0:
+    if index == 5:
+        tool_match_index = list(tool_df.query('match==1').index)
+        proficiency_index = 0
+        for tool_df_index in tool_match_index:
+            if proficiency[proficiency_index] == "BEGINNER":
+                tool_df.loc[tool_df_index,"match"] = 0.65
+            elif proficiency[proficiency_index] == "INTERMEDIATE":
+                tool_df.loc[tool_df_index,"match"] = 0.8
+            proficiency_index = proficiency_index + 1
+        skill_list = []
+        for skill_index in range(0,len(tool_df)):
+            skill_list.append({"name": tool_df.loc[skill_index,"tool"], "level": tool_df.loc[skill_index,"match"]})
+        research = round(0.5 * responder.company_research_score(chat_log.response[3],JD) +  0.5 * responder.company_research_score(resume,JD),2)
         dict_object = {
             "id": "1",
             "name": "Simarpreet Luthra",
@@ -100,58 +117,37 @@ def scoring_metric(user):
             "education_level": [
                 {
                 "type": "Education",
-                "name": "Bachelor of Life Science",
-                "eduLevel": 1,
-                "reqLevel": 3
+                "name": current_edu,
+                "eduLevel": current_level_rank,
+                "reqLevel": threshold_level_rank
                 }
             ],
-            "skill_set": [
-                {
-                "name": "Python",
-                "level": 0.25
-                },
-                {
-                "name": "HTML5",
-                "level": 0.5
-                },
-                {
-                "name": "R",
-                "level": 0.75
-                },
-                {
-                "name": "Java",
-                "level": 0.25
-                },
-                {
-                "name": "PHP7",
-                "level": 0.5
-                }
-            ],
+            "skill_set": skill_list,
             "research_value": [
                 {
                     "name": 'actual',
-                    "value": 0.8
+                    "value": research
                 },
                 {
                     "name": 'remain',
-                    "value": 0.2
+                    "value": 1 - research
                 }
             ],
             "sentimental_level": [
                 {
-                "sentiValue": 0.87
+                "sentiValue": responder.sentiment_score(chat_log.response[0])
                 },
                 {
-                "sentiValue": 0.8
+                "sentiValue": responder.sentiment_score(chat_log.response[1])
                 },
                 {
-                "sentiValue": -0.2
+                "sentiValue": responder.sentiment_score(chat_log.response[2])
                 },
                 {
-                "sentiValue": 0.38
+                "sentiValue": responder.sentiment_score(chat_log.response[3])
                 },
                 {
-                "sentiValue": 0.45
+                "sentiValue": responder.sentiment_score(chat_log.response[4])
                 }
             ]
         }

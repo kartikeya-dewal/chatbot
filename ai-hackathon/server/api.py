@@ -18,7 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
         userId = serializer.data["id"]
         data = scoring_metric(userObject)
         print(data)
-        return Response({"userId": userId, "data": data})
+        return Response({"data": data})
 
     def update(self, request, *args, **kwargs):
         print(request.data)
