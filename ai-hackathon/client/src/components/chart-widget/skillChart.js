@@ -46,7 +46,15 @@ const skillChart = () => {
   // ]
 
   // const sortData = data.sort((a,b) => (a.level < b.level) ? 1 : -1 )
-
+  if (!skill)
+  return (
+    <Fragment>
+      <div class="alert alert-info" role="alert">
+        Currently there is no data to display.
+      </div>
+    </Fragment>
+  );
+  
   return (
     <Fragment>
       <h2 className="text-center">Skill Chart</h2>
@@ -56,9 +64,9 @@ const skillChart = () => {
           data={skill}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" />
-          <YAxis dataKey="name" type="category" />
-          <Bar dataKey="level" fill="#666666" />
+          <XAxis type="number" domain={[0,1]} tick={{fontSize: 12}} />
+          <YAxis dataKey="name" type="category" tick={{fontSize: 12}}/>
+          <Bar dataKey="level" label={{ fill: 'red', fontSize: 15 }} />
         </BarChart>
       </ResponsiveContainer>
     </Fragment>

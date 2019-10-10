@@ -46,7 +46,15 @@ const sentiChart = () => {
   //     sentiValue: 0.45
   //   }
   // ];
-
+  if (!senti)
+  return (
+    <Fragment>
+      <div class="alert alert-info" role="alert">
+        Currently there is no data to display.
+      </div>
+    </Fragment>
+  );
+  
   return (
     <Fragment>
       <h2 className="text-center">Sentimental Level</h2>

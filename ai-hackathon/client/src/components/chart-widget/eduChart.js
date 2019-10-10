@@ -14,6 +14,7 @@ const Chart = (props) => {
       .get(`/api/user/` + id.id )
       .then(result => {
         setTimeout(() => {
+          console.log(result.data.data.education_level)
           setEdu(result.data.data.education_level);
         }, 1000);
       })
@@ -60,7 +61,15 @@ const Chart = (props) => {
       return 'missing education data';
     }
   }
-
+  if (!edu)
+  return (
+    <Fragment>
+      <div class="alert alert-info" role="alert">
+        Currently there is no data to display.
+      </div>
+    </Fragment>
+  );
+  
   return (
     <Fragment>
       <h2 className='text-center'>Education Level</h2>

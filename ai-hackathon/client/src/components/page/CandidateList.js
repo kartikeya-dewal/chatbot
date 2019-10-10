@@ -63,7 +63,7 @@ const CandidateList = () => {
         {users.map((user, index) => {
           return (
             <li key={index}>
-              Score: {user.overallScore}{" "}
+              {/* Score: {user.overallScore}{" "} */}
               <Link to={`recruiter/user/${user.id}`}>{user.name}</Link>
             </li>
           );

@@ -33,6 +33,16 @@ const resChart = () => {
   ];
 
   const COLORS = ["#0088FE", "#FFF", "#FFBB28", "#FF8042"];
+
+  if (!res)
+  return (
+    <Fragment>
+      <div class="alert alert-info" role="alert">
+        Currently there is no data to display.
+      </div>
+    </Fragment>
+  );
+  
   return (
     <Fragment>
       <h2 className="text-center">Research Chart</h2>
