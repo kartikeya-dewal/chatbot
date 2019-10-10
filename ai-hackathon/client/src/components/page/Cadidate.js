@@ -17,8 +17,8 @@ const Candidate = () => {
       .get(`/api/user/` + id.id )
       .then(result => {
         setTimeout(() => {
-          console.log(result.data);
-          setUser(result.data);
+          // console.log(result.data.data);
+          setUser(result.data.data);
         }, 1000);
       })
       .catch(error => {
@@ -31,7 +31,7 @@ const Candidate = () => {
     <Fragment>
       <div className="row charts-wrapper">
         <div className="col-12 col-md-6">
-          <EduChart />
+          <EduChart eduList = {user.education_level}/>
         </div>
         <div className="col-12 col-md-6">
           <SentiChart />

@@ -10,7 +10,7 @@ const CandidateList = () => {
       .get("/api/user")
       .then(result => {
         setTimeout(() => {
-          console.log(result.data);
+          // console.log(result.data);
           setUsers(result.data);
         }, 1000);
       })

@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react'
 import { BarChart, CartesianGrid, XAxis, YAxis, Label, LabelList, Bar, ReferenceLine, ResponsiveContainer } from 'recharts'
-const Chart = () => {
+const Chart = (props) => {
   const [height, setHeight] = useState(400)
   const [width, setWidth] = useState(400)
+  console.log(props.eduList);
+  
   const data = [
     {
       "type": "Education",
