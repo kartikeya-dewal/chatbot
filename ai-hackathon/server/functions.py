@@ -1,6 +1,7 @@
 from .src import responder
 import pandas as pd
 import json
+import numpy as np
 
 
 ### Chat variables ###
@@ -110,10 +111,14 @@ def scoring_metric(user):
         for skill_index in range(0,len(tool_df)):
             skill_list.append({"name": tool_df.loc[skill_index,"tool"], "level": tool_df.loc[skill_index,"match"]})
         research = round(0.5 * responder.company_research_score(chat_log.response[3],JD) +  0.5 * responder.company_research_score(resume,JD),2)
+        senti_list = []
+        for chat_index in range(0,len(chat_log)):
+            senti_list.append(responder.sentiment_score(chat_log.response[chat_index]))
+        overall = (research + np.mean(tool_df.match) + np.mean(senti_list) + responder.overall_education_score(JD,resume))*25
         dict_object = {
             "id": "1",
             "name": "Simarpreet Luthra",
-            "overall_score": "85",
+            "overall_score": overall,
             "education_level":
                 {
                 "type": "Education",
