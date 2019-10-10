@@ -1,15 +1,23 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import axios from "axios";
 
 const CandidateList = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({ list: [] });
+
+  const makeList = [];
+
   useEffect(() => {
-    fetchUsers;
-  }, [fetchUsers]);
-  const fetchUsers = async () => {
-    users = await axios.get(`/api/user/`);
-  };
+    const result = axios.get("/api/user").then(result => {
+      setTimeout(() => {
+        console.log(result.data);
+        setUsers({list: result.data})
+      }, 1000);
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
+  }, []);
 
   const userList = [
     {
