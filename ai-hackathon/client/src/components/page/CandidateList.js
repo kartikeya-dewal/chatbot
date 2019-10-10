@@ -3,20 +3,20 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import axios from "axios";
 
 const CandidateList = () => {
-  const [users, setUsers] = useState({ list: [] });
-
-  const makeList = [];
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const result = axios.get("/api/user").then(result => {
-      setTimeout(() => {
-        console.log(result.data);
-        setUsers({list: result.data})
-      }, 1000);
-    })
-    .catch((error)=>{
-      console.log(error);
-    });
+    const result = axios
+      .get("/api/user")
+      .then(result => {
+        setTimeout(() => {
+          console.log(result.data);
+          setUsers(result.data);
+        }, 1000);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
 
   const userList = [
@@ -47,11 +47,20 @@ const CandidateList = () => {
     }
   ];
 
+  if (!users)
+    return (
+      <Fragment>
+        <div class="alert alert-info" role="alert">
+          Currently there is no candidate to display.
+        </div>
+      </Fragment>
+    );
+
   return (
     <Fragment>
       <div className="display1">User List</div>
       <ul>
-        {userList.map((user, index) => {
+        {users.map((user, index) => {
           return (
             <li key={index}>
               Score: {user.overallScore}{" "}
