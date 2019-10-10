@@ -6,6 +6,7 @@ import pandas as pd
 import nltk 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download('vader_lexicon')
+nltk.download('stopwords')
 import string
 
 # Document processing corpus
