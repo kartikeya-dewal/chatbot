@@ -119,14 +119,13 @@ def scoring_metric(user):
             "id": "1",
             "name": "Simarpreet Luthra",
             "overall_score": overall,
-            "education_level": [
+            "education_level":
                 {
                 "type": "Education",
                 "name": current_edu,
                 "eduLevel": current_level_rank,
                 "reqLevel": threshold_level_rank
-                }
-            ],
+                },
             "skill_set": skill_list,
             "research_value": [
                 {
