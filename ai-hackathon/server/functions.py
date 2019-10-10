@@ -151,5 +151,5 @@ def scoring_metric(user):
                 }
             ]
         }
-        json_object = json.dumps(dict_object)
+        json_object = dict_object
         return json_object
