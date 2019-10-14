@@ -1,6 +1,6 @@
 # AI Hackathon
 
-This is a chatbot application with Django REST API backend and React frontend.<br/>
+This is an Interview chatbot application with Django REST API backend and React frontend.<br/>
 
 ## Project Structure
 
